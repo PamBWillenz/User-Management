@@ -7,3 +7,21 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Generate 1000 fake employee records
+require 'faker'
+
+1000.times do
+  Employee.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    contact_number: Faker::Number.number(digits: 10),
+    address: Faker::Address.street_address,
+    pincode: Faker::Address.postcode,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65),  
+    date_of_hiring: Faker::Date.between(from: 5.year.ago, to: Date.today)  
+  )
+end
