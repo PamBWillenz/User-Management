@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Employee</title>
+  <%= stylesheet_link_tag 'application', media: 'all', data: { turbolinks: false } %>
+</head>
+<body>
+  <div class="container mt-3">
+    <h1>Edit Employee</h1>
+    <%= render 'form', employee: @employee %>
+  </div>
+</body>
+</html>
