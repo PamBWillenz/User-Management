@@ -3,7 +3,9 @@ class EmployeesController < ApplicationController
 
   # GET /employees (index action)
   def index
-    @employees = Employee.all
+    # @employees = Employee.all
+    @q = Employee.ransack(params[:q])
+    @employees = @q.result(distinct: true)
   end
 
   # GET /employees/:id (show action)

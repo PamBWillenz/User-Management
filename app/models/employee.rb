@@ -10,4 +10,10 @@ class Employee < ApplicationRecord
           (current_date.month == date_of_birth.month && current_date.day >= date_of_birth.day)) ? 0: 1)
         return age
     end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["address", "city", "contact_number", "date_of_birth", "date_of_hiring", 
+      "email", "first_name", "last_name", "pincode", "state"]
+    end
+  
 end
