@@ -62,6 +62,17 @@ class EmployeesController < ApplicationController
     redirect_to employees_path, notice: "Employee deleted successfully!"
   end
 
+  def import
+    require 'csv'
+    file = params[:file]
+
+    CSV.foreach(file.path, headers: true) do |row|
+      Employee.create(row.to_h)
+    end
+
+    redirect_to  employees_path, notice: "Employees imported successfully"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions

@@ -54,7 +54,11 @@
       <%= f.submit "Search", class: "btn btn-primary" %>
     </div>
   <% end %>
-
+  <br />
+  <%= form_tag import_employees_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import CSV"%>
+<% end %>
 
 
   <% if @employees.any? %>
