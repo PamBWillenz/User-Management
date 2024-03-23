@@ -6,6 +6,14 @@ class EmployeesController < ApplicationController
     # @employees = Employee.all
     @q = Employee.ransack(params[:q])
     @employees = @q.result(distinct: true)
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        csv_data = CsvExportService.new(@employees).generate_csv
+        send_data csv_data, filename: "employees-#{Date.today}.csv"
+      end
+    end
   end
 
   # GET /employees/:id (show action)
