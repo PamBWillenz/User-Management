@@ -10,8 +10,12 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        csv_data = CsvExportService.new(@employees).generate_csv
+        csv_data = EmployeeCsvExportService.new(@employees).generate_csv
         send_data csv_data, filename: "employees-#{Date.today}.csv"
+      end
+      format.xls do
+        xls_data = EmployeeExcelExportService.new(@employees).export_to_excel
+        send_data xls_data, filename: "employees-#{Date.today}.xls"
       end
     end
   end

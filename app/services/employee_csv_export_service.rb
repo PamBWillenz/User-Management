@@ -1,6 +1,6 @@
 require 'csv'
 
-class CsvExportService
+class EmployeeCsvExportService
   def initialize(objects)
     @objects = objects 
   end
