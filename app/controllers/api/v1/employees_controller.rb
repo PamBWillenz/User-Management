@@ -1,4 +1,5 @@
 class Api::V1::EmployeesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_employee, only: [:show, :update, :destroy]
 
   # GET /api/v1/employees
@@ -43,10 +44,12 @@ class Api::V1::EmployeesController < ApplicationController
   # Use callbacks to share common setup or contraints between actions
   def set_employee
     @employee = Employee.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => error
+    render json: { message: error.message }
   end
 
   def employee_params
-    params.require(employee).permit[:first_name, :last_name, :email, :contact_number, 
-    :address, :pincode, :city, :state, :date_of_birth, :date_of_hiring]
+    params.require(:employee).permit(:first_name, :last_name, :email, :contact_number, 
+    :address, :pincode, :city, :state, :date_of_birth, :date_of_hiring)
   end
 end
