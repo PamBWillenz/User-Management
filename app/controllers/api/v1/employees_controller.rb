@@ -39,6 +39,19 @@ class Api::V1::EmployeesController < ApplicationController
     render json: {message: 'Employee deleted successfully'}
   end
 
+  def import
+    require 'csv'
+    file = params[:file]
+    if file
+      CSV.foreach(file.path, headers: true) do |row|
+        Employee.create(row.to_h)
+      end
+      render json: { message: 'Employee CSV imported successfully'}, status: :ok
+    else
+      render json: { message: 'No CSV uploaded, please upload a valid CSV file'}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or contraints between actions
