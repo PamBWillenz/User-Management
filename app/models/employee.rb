@@ -15,5 +15,8 @@ class Employee < ApplicationRecord
       ["address", "city", "contact_number", "date_of_birth", "date_of_hiring", 
       "email", "first_name", "last_name", "pincode", "state"]
     end
-  
-end
+
+    def full_name
+      "#{first_name} #{last_name}".strip
+    end
+ end
